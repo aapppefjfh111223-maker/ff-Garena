@@ -32,11 +32,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(UPLOAD_DIR));
-app.use(session({
-  secret: 'ff-arena-secret-change-me',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }
+app.use(cookieSession({
+  name: 'ffsession',
+  keys: ['بدل-هاذا-بسر-طويل-وعشوائي-متاعك'],
+  maxAge: 1000 * 60 * 60 * 24 * 30
 }));
 
 const upload = multer({
