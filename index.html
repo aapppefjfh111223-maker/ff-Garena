@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بطلة فري فاير | منصة البطولات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&family=Tajawal:wght@300;400;500;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div id="liveBanner" class="live-banner" style="display:none;">
+  <span class="live-dot"></span>
+  <span id="liveText"></span>
+</div>
+
+<header>
+  <div class="topwrap">
+    <div class="brand"><span class="spark">🔥</span> بطلة فري فاير</div>
+    <nav id="mainNav">
+      <button class="nav-item active" data-tab="home">الرئيسية</button>
+      <button class="nav-item" data-tab="board">الترتيب</button>
+      <button class="nav-item" data-tab="matches">التحديات</button>
+      <button class="nav-item" data-tab="team">فريقي</button>
+      <button class="nav-item" data-tab="contact">تواصل معنا</button>
+      <button class="nav-item" data-tab="admin">الإدارة</button>
+    </nav>
+    <div id="authArea"></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">FREE FIRE ARENA</span>
+        <h1>سجّل، كوّن فريقك، وتحدّى في <span>1v1</span> أو معارك الفرق</h1>
+        <p>منصة بطلة فري فاير تجمع اللاعبين في مكان وحد: بروفايل، فريق، تحديات، وترتيب مباشر.</p>
+        <div class="hero-stats">
+          <div class="stat"><b id="statPlayers" class="mono">0</b><span>لاعب مسجّل</span></div>
+          <div class="stat"><b id="statTeams" class="mono">0</b><span>فريق</span></div>
+          <div class="stat"><b id="statMatches" class="mono">0</b><span>تحدي منظّم</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card" id="loginCard">
+        <h3>🔐 تسجيل الدخول</h3>
+        <div id="loginMsg"></div>
+        <div class="field"><label>اسم المستخدم</label><input id="loginUser" placeholder="مثال: sniper_tn"></div>
+        <div class="field"><label>كلمة السر</label><input id="loginPass" type="password" placeholder="••••••••"></div>
+        <button class="btn btn-primary" onclick="doLogin()">دخول</button>
+        <div class="switch-link">ماعندكش حساب؟ <a onclick="scrollToReg()">سجّل هنا</a></div>
+      </div>
+
+      <div class="card" id="regCard">
+        <h3>🆕 تسجيل حساب جديد</h3>
+        <div id="regMsg"></div>
+        <div class="row2">
+          <div class="field"><label>اسم المستخدم</label><input id="regUser" placeholder="اسم الدخول"></div>
+          <div class="field"><label>كلمة السر</label><input id="regPass" type="password"></div>
+        </div>
+        <div class="field"><label>ID فري فاير</label><input id="regGameId" class="mono" placeholder="123456789"></div>
+        <div class="row2">
+          <div class="field"><label>واتساب</label><input id="regWa" class="mono" placeholder="+216 ..."></div>
+          <div class="field"><label>انستقرام</label><input id="regInsta" placeholder="@..."></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>تلقرام</label><input id="regTg" placeholder="@..."></div>
+          <div class="field"><label>فيسبوك</label><input id="regFb" placeholder="رابط أو اسم"></div>
+        </div>
+        <button class="btn btn-gold" onclick="doRegister()">إنشاء الحساب</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section id="board">
+    <h2 class="section-title">🏆 ترتيب اللاعبين</h2>
+    <div id="playerBoard" class="card"></div>
+    <h2 class="section-title" style="margin-top:32px;">👥 ترتيب الفرق</h2>
+    <div id="teamBoard" class="card"></div>
+  </section>
+
+  <!-- MATCHES -->
+  <section id="matches">
+    <h2 class="section-title">⚔️ التحديات</h2>
+    <div class="card" style="margin-bottom:22px;">
+      <h3>إنشاء تحدي جديد</h3>
+      <div id="matchMsg"></div>
+      <div class="row2">
+        <div class="field">
+          <label>نوع التحدي</label>
+          <select id="matchType">
+            <option value="1v1">1 ضد 1</option>
+            <option value="team">فريق ضد فريق</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>الخصم</label>
+          <select id="matchOpponent"></select>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="createMatch()">إطلاق التحدي</button>
+    </div>
+    <div id="matchList"></div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <h2 class="section-title">👥 فريقي</h2>
+    <div id="teamArea" class="card"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title">📞 تواصل معنا</h2>
+    <p class="muted" style="margin-bottom:22px;">عندك مشكل تقني أو استفسار على البطولة؟ تواصل معانا مباشرة:</p>
+    <div class="contact-grid">
+      <div class="contact-card wa">
+        <div class="ico">🟢</div>
+        <h3>واتساب</h3>
+        <p class="muted">+216 46 560 402</p>
+        <a class="btn-link wa-link" href="https://wa.me/21646560402" target="_blank">راسلنا</a>
+      </div>
+      <div class="contact-card tg">
+        <div class="ico">✈️</div>
+        <h3>تلقرام</h3>
+        <p class="muted">@knatri77</p>
+        <a class="btn-link tg-link" href="https://t.me/knatri77" target="_blank">راسلنا</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="admin">
+    <div id="adminLockView" class="admin-lock card">
+      <h3 style="margin-bottom:16px;">🔒 دخول الإدارة</h3>
+      <div id="adminMsg"></div>
+      <div class="field"><label>كود الإدارة</label><input id="adminCode" type="password" placeholder="••••••"></div>
+      <button class="btn btn-ghost" onclick="unlockAdmin()">دخول</button>
+    </div>
+    <div id="adminPanel" style="display:none;">
+      <h2 class="section-title">🛠️ لوحة تحكم الإدارة</h2>
+
+      <div class="card" style="margin-bottom:22px;">
+        <h3>🎙️ المعلّق الرسمي 24/7</h3>
+        <div class="row2">
+          <div class="field"><label>الاسم المعروض</label><input id="commName" placeholder="اسمك كمعلّق"></div>
+          <div class="field"><label>المعرّف (واتساب/تلقرام/انستقرام)</label><input id="commHandle" placeholder="@..."></div>
+        </div>
+        <label class="switch-row"><input type="checkbox" id="commLive"> البث مباشر الآن (يظهر شريط في أعلى الموقع)</label>
+        <button class="btn btn-gold" style="margin-top:12px;" onclick="saveCommentator()">حفظ</button>
+      </div>
+
+      <div class="card" style="margin-bottom:22px;">
+        <h3>التحديات المعلّقة</h3>
+        <div id="adminMatches"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:22px;">
+        <h3>اللاعبون</h3>
+        <div class="table-wrap">
+        <table>
+          <thead><tr><th>المستخدم</th><th>ID</th><th>الفريق</th><th>نقاط</th><th>تواصل</th><th>—</th></tr></thead>
+          <tbody id="adminUsers"></tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>الفرق</h3>
+        <div class="table-wrap">
+        <table>
+          <thead><tr><th>الفريق</th><th>النوع</th><th>الأعضاء</th><th>كود الدعوة</th><th>نقاط</th><th>—</th></tr></thead>
+          <tbody id="adminTeams"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>بطلة فري فاير — منصة بطولات مجتمعية غير رسمية · ليست تابعة لشركة Garena</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

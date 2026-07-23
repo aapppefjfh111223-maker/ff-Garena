@@ -1,0 +1,12 @@
+{
+  "users": [],
+  "teams": [],
+  "matches": [],
+  "settings": {
+    "commentator": {
+      "name": "المعلق الرسمي",
+      "handle": "",
+      "live": false
+    }
+  }
+}
